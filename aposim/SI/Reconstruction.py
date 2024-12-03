@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import os
 import datetime as DT
 
-base_dir = r"E:\Walter_2024\Recordings\img_Gratings_2024-08-08_14-09-05_ex300us"
-base_dir = r"E:\Walter_2024\Recordings\img_Gratings_2024-08-08_14-19-32_ex1500us"
-base_dir = r"E:\Walter_2024\Recordings\img_Gratings_2024-08-15_10-29-32_ex1500us"
+base_dir = r"E:\Mehrad_2024\Test by Mehrad\2\img_Gratings_2024-11-19_13-49-41_ex1500us"
+base_dir = r"E:\Mehrad_2024\Test by Mehrad\2\img_Gratings_2024-11-19_13-51-20_ex1500us"
+base_dir = r"E:\Mehrad_2024\Test by Mehrad\2\img_Gratings_2024-11-19_13-51-35_ex1500us"
 # folder_name = 'img_both_2023-04-24_16-31-50'
 # folder_name = 'img_both_2023-05-16_11-33-35'
 folder_name = base_dir+r'\raw'

@@ -14,6 +14,7 @@ def test_PVCamera():
     cam._displayStreamOfImages()
     cam.disconnect()
 
+
 def test_PVCameraGui():
     from viscope.main import viscope
     from viscope.gui.allDeviceGUI import AllDeviceGUI
@@ -35,6 +36,7 @@ def test_PVCameraGui():
     cam.disconnect()
 
 
+
 def test_GCSSwitch():
     ''' check if GCSSwitch works'''
     from aposim.instrument.switch.gcsSwitch import GCSSwitch
@@ -45,11 +47,22 @@ def test_GCSSwitch():
     mP = switch.getParameter('position')
     print(f'position = {mP}')
     switch.setParameter('position', mP+1)
-
     mP = switch.getParameter('position')
     print(f'new position = {mP}')
 
+    switch.setParameter('position', mP+1)
+    mP = switch.getParameter('position')
+    print(f'new position = {mP}')
+
+    switch.setParameter('position', mP+1)
+    mP = switch.getParameter('position')
+    print(f'new position = {mP}')
+
+
     switch.disconnect()
+
+#test_GCSSwitch()
+
 
 @pytest.mark.GUI
 def test_smarACTStage_2():
@@ -70,3 +83,5 @@ def test_smarACTStage_2():
     viscope.run()
 
     switch.disconnect()
+
+test_smarACTStage_2()
