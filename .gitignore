@@ -161,3 +161,6 @@ cython_debug/
 
 # local DATA
 DATA/
+
+# vscode settings
+.vscode

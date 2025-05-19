@@ -84,4 +84,4 @@ def test_smarACTStage_2():
 
     switch.disconnect()
 
-test_smarACTStage_2()
+#test_smarACTStage_2()

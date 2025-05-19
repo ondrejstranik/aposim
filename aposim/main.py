@@ -115,8 +115,8 @@ class Aposim():
 
 if __name__ == "__main__":
 
-    Aposim.runReal()
-    #Aposim.runVirtual()
+    #Aposim.runReal()
+    Aposim.runVirtual()
     
 #%%
 
