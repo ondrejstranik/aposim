@@ -36,6 +36,7 @@ class GCSSwitch(BaseSwitch):
 
         self.positionValue = rangemin + np.arange(stepnum)*steplen
         self.positionList = np.arange(stepnum).astype(str).tolist()
+        print(f'positon List = {self.positionList}')
 
     def connect(self,initialPosition=DEFAULT['initialPosition']):
         super().connect()
@@ -71,8 +72,8 @@ class GCSSwitch(BaseSwitch):
         # information, e.g. the limits for _all_ axes. With setter commands
         # however you have to specify the axes/channels. GCSDevice provides
         # a property "axes" which returns the names of all connected axes.
-        print('rangemin ='+ str(pidevice.qTMN()))
-        print('rangemax ='+ str(pidevice.qTMX()))
+        print('rangemin ='+ str(self.pidevice.qTMN()))
+        print('rangemax ='+ str(self.pidevice.qTMX()))
 
 
         axisnum = 0
@@ -84,8 +85,14 @@ class GCSSwitch(BaseSwitch):
     def _setPosition(self,positionNumber):
         ''' set the position in the switcher '''
         self.position = positionNumber
+        print(f'new position {self.position}')
+        print(f'new position in steps {self.positionValue[positionNumber]}')
+
         self.pidevice.MOV(self.axis, self.positionValue[positionNumber])
         pitools.waitontarget(self.pidevice, axes=self.axis)
+
+        print(f'position_now = {self.pidevice.qPOS(self.axis)[self.axis]}')
+
 
     def disconnect(self):
         self.pidevice.CloseConnection()

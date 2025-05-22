@@ -20,9 +20,10 @@ from pyvcam.camera import Camera
 class PVCamera(BaseCamera):
     ''' class to control pv camera. use pyvcam package '''
     DEFAULT = {'name': 'pvCamera',
-                'exposureTime': 1.5, # ms initially automatically set the exposure time
+                'exposureTime': 5, # ms initially automatically set the exposure time
                 'nFrame': 1,
                 'exp_out_mode': 1,
+                #'cam.exp_res' : 1
                 #{'First Row': 0, 'All Rows': 1, 'Rolling Shutter': 3} (Iris-Manual p.20)
                 #cam.exp_out_mode = 0 or 3 # use for permanent light and no gating (Iris-Manual p.20)
                 #cam.exp_out_mode = 1 # use for CoolLED gating (the gate of the CoolLed is the "shutter") (Iris-Manual p.20) do not use for permanent light since exposuretime will be extendet by ca. 10ms read time
@@ -57,6 +58,10 @@ class PVCamera(BaseCamera):
         self.cam.exp_out_mode = PVCamera.DEFAULT['exp_out_mode']
         print(r'cam.exp_out_mode: '+str(self.cam.exp_out_mode))
 
+        #self.cam.exp_res = 0 #exp_time is given in ms
+        self.cam.exp_res = 1 #exp_time is given in us
+        #print(r'cam.exp_res: ' + str(self.cam.exp_res))
+
         # fixed parameters
         # TODO: set to DEFAULTS
         # print(cam.post_processing_table)
@@ -68,7 +73,7 @@ class PVCamera(BaseCamera):
         # set the camera exposure time 
         self.setParameter('exposureTime',self.exposureTime)
 
-        self.cam.start_acquisition()
+        self.startAcquisition()
 
     def disconnect(self):
         self.cam.close()
@@ -78,7 +83,7 @@ class PVCamera(BaseCamera):
     def getLastImage(self):
         myframe = None
         for _ in range(self.nFrame):
-            _myframe = self.cam.get_frame().reshape((self.height,self.width))
+            _myframe = self.cam.get_frame().reshape((self.width,self.height))
             if myframe is None:
                 myframe = _myframe
             else:
@@ -89,16 +94,16 @@ class PVCamera(BaseCamera):
     def _setExposureTime(self,value): # ms
         # set the expression time
 
-        self.cam.stop_acquisition()
+        self.stopAcquisition()
 
         print(f'set Exposure Time {value}')
-        self.cam.exp_time(value*1000)     
-        self.exposureTime = value
+        self.cam.exp_time = value     
+        self.exposureTime = value 
 
-        self.cam.start_acquisition()
+        self.startAcquisition()
 
     def _getExposureTime(self):
-        self.exposureTime = self.cam.get_exposure()/1000
+        self.exposureTime = self.cam.exp_time 
         return self.exposureTime
     
 

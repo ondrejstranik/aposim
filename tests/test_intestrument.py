@@ -65,8 +65,8 @@ def test_GCSSwitch():
 
 
 @pytest.mark.GUI
-def test_smarACTStage_2():
-    ''' check if smarACT stage in gui works'''
+def test_GCSSwitch_GUI():
+    ''' check if GCSSwitch GUI works'''
     from aposim.instrument.switch.gcsSwitch import GCSSwitch
 
     from viscope.main import viscope
